@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from . import MetaSet
+from metaset import MetaSet
 
 
 def test_union():

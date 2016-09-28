@@ -4,6 +4,7 @@
 *.pyo
 
 # Build-related files
+build
 dist
 .cache
 .tox

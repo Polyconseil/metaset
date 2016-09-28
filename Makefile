@@ -7,10 +7,10 @@ quality:
 	flake8 setup.py metaset
 
 test:
-	nosetests metaset
+	nosetests tests
 
 test_docstring:
-	nosetests --with-doctest metaset/__init__.py
+	nosetests --with-doctest metaset
 
 clean:
 	-rm -rf ".cache"
