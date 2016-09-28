@@ -18,7 +18,7 @@ setup(
     url='https://github.com/Polyconseil/metaset',
     download_url='http://pypi.python.org/pypi/metaset/',
     packages=find_packages(),
-    long_description=read('README.md'),
+    long_description=read('README.rst'),
     install_requires=[],
     classifiers=[
         'Development Status :: 5 - Production/Stable',

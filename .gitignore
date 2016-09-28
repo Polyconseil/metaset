@@ -4,6 +4,7 @@
 *.pyo
 
 # Build-related files
+dist
 .cache
 .tox
 *.egg-info
