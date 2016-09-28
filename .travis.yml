@@ -18,3 +18,7 @@ matrix:
     # Quality
     - python: "3.5"
       env: TOXENV=quality
+
+    # Docstring
+    - python: "3.5"
+      env: TOXENV=docstring
