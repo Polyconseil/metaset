@@ -12,7 +12,7 @@ This package provides a collection that is basically a "dict of sets", named Met
 
 ## Quickstart
 
-Install the package from `PyPI`_, using pip:
+Install the package from [PyPI](http://pypi.python.org/pypi/metaset/), using pip:
 
 ```
 pip install metaset
