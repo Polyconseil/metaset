@@ -4,10 +4,10 @@ update:
 	pip install -r requirements.txt
 
 quality:
-	flake8 setup.py __init__.py
+	flake8 setup.py metaset
 
 test:
-	nosetests tests.py
+	nosetests --with-doctest metaset
 
 clean:
 	-rm -rf ".cache"
