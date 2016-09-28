@@ -1,0 +1,10 @@
+# Temporary files
+.*.swp
+*.pyc
+*.pyo
+
+# Build-related files
+.cache
+.tox
+*.egg-info
+*.egg

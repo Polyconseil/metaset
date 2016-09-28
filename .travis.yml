@@ -1,0 +1,20 @@
+sudo: false
+language: python
+
+script:
+  - tox
+
+matrix:
+  include:
+    - python: "2.7"
+      env: TOXENV=py27-django18
+      env: TOXENV=py27-django19
+      env: TOXENV=py27-django110
+    - python: "3.5"
+      env: TOXENV=py35-django18
+      env: TOXENV=py35-django19
+      env: TOXENV=py35-django110
+
+    # Quality
+    - python: "3.5"
+      env: TOXENV=quality

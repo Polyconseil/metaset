@@ -1,0 +1,4 @@
+-e .
+nose
+flake8
+tox
