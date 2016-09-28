@@ -2,7 +2,7 @@
 
 This package provides a collection that is basically a "dict of sets", named MetaSet.
 
-![Build status](https://secure.travis-ci.org/lionel-panhaleux/metaset.png?branch=master)
+![Build status](https://travis-ci.org/Polyconseil/metaset.svg?branch=master)
 
 ![Supported Python versions](https://img.shields.io/pypi/pyversions/metaset.svg)
 
