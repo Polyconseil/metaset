@@ -29,27 +29,27 @@ Install the package from PyPI_, using pip:
 
 .. _PyPI: http://pypi.python.org/pypi/metaset/
 
-.. code-block: sh
+.. code-block:: sh
 
     pip install metaset
 
 
 Or from GitHub:
 
-.. code-block: sh
+.. code-block:: sh
 
     $ git clone git://github.com/lionel-panhaleux/metaset.git
 
 Import it in your code:
 
-.. code-block: python
+.. code-block:: python
 
     from metaset import MetaSet
 
 Usage is quite straight forward,
 basic set operations are supported via the binary operators `+` `-` `|` `^`.
 
-.. code-block: python
+.. code-block:: python
 
     >>> MetaSet(a={1, 2}, b={3}) | MetaSet(b={4}, c={5})
     {'a': {1, 2}, 'b': {3, 4}, 'c': {5}}
@@ -67,7 +67,7 @@ In this alternative implementation,
 we chose to keep the empty keys as meaningful elements,
 allowing for smart unions and intersections.
 
-.. code-block: python
+.. code-block:: python
 
     >>> MetaSet(a={1}) | Metaset(a={2}, b=set())
     {'a': {1, 2}, 'b': set()}
@@ -80,7 +80,7 @@ and consider using dictset_ if it is a better match for your use case.
 The behavior for subtraction and symmetric difference,
 although sound on a mathematical point of view, may not be what you want.
 
-.. code-block: python
+.. code-block:: python
 
     >>> MetaSet(a={1}) - MetaSet(a={1})
     {'a': set()}
