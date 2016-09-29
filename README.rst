@@ -72,12 +72,12 @@ It is quite straightforward:
 
 It is compatible with the following versions:
 
-- Django 1.7, Python 2.7, 3.4 (requires jsonfield)
-- Django 1.8, Python 2.7, 3.5 (requires jsonfield)
+- Django 1.7, Python 2.7, 3.4 (requires `jsonfield`_)
+- Django 1.8, Python 2.7, 3.5 (requires `jsonfield`_)
 - Django 1.9, Python 2.7, 3.5
 - Django 1.10, Python 2.7, 3.5
 
-Note when you use `Django>=1.9` you have access to `JSON-specific lookups`_ not available when using ``jsonfield``
+Note when you use `Django>=1.9` you have access to `JSON-specific lookups`_ not available when using `jsonfield`_
 on earlier versions:
 
 .. code-block:: python
@@ -88,6 +88,7 @@ on earlier versions:
     >>> MyModel.objects.filter(mset__has_keys=('a', 'b'))           # doctest: +SKIP
     >>> MyModel.objects.filter(mset__has_any_keys=('a', 'b'))       # doctest: +SKIP
 
+.. _jsonfield: https://pypi.python.org/pypi/jsonfield
 .. _JSON-specific lookups: https://docs.djangoproject.com/en/1.10/ref/contrib/postgres/fields/#containment-and-key-operations
 
 Detailed considerations
