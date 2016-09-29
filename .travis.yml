@@ -1,6 +1,12 @@
 sudo: false
 language: python
 
+services:
+  - postgresql
+
+addons:
+  postgresql: "9.4"
+
 script:
   - tox
 
