@@ -4,7 +4,7 @@ update:
 	pip install -r requirements.txt
 
 quality:
-	flake8 setup.py metaset
+	flake8 setup.py metaset tests
 
 test:
 	nosetests tests

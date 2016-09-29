@@ -31,14 +31,14 @@ Install the package from PyPI_, using pip:
 
 .. code-block:: sh
 
-    pip install metaset
+    > pip install metaset
 
 
 Or from GitHub:
 
 .. code-block:: sh
 
-    $ git clone git://github.com/lionel-panhaleux/metaset.git
+    > git clone git://github.com/lionel-panhaleux/metaset.git
 
 Import it in your code:
 

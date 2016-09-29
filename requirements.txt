@@ -1,4 +1,5 @@
 -e .
+psycopg2
 nose
 flake8
 tox
