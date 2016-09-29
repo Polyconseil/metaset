@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
-try:
+from __future__ import absolute_import, unicode_literals
 
+
+try:
     from django.utils.translation import ugettext_lazy
+# avoid import failures for non Django builds.
 except ImportError:
     JSONField = object
     ugettext_lazy = lambda a: a  # noqa: E731
@@ -9,6 +12,7 @@ except ImportError:
 try:
     from django.contrib.postgres.fields import JSONField
 except ImportError:
+    # For Django < 1.9 use jsonfield (https://pypi.python.org/pypi/jsonfield)
     try:
         from jsonfield import JSONField
     except ImportError:
@@ -16,13 +20,6 @@ except ImportError:
 
 
 from . import MetaSet
-
-
-def _recur_build_metaset(value):
-    try:
-        return MetaSet({k: _recur_build_metaset(v) for k, v in value.items()})
-    except AttributeError:
-        return set(value)
 
 
 def _recur_serialize_metaset(value):
@@ -54,7 +51,7 @@ class MetaSetField(JSONField):
             return value
         if value is None:
             return None
-        return _recur_build_metaset(value)
+        return MetaSet.from_dict(value)
 
     def get_db_prep_save(self, value, connection, prepared=False):
         if value is not None:

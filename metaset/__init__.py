@@ -3,6 +3,7 @@ from __future__ import absolute_import, unicode_literals
 from copy import deepcopy
 from pkg_resources import get_distribution
 
+
 __version__ = get_distribution('metaset').version
 
 
@@ -49,6 +50,13 @@ class MetaSet(dict):
     >>> MetaSet(a=MetaSet(b={1}), c=MetaSet(d={3})) & MetaSet(a=MetaSet(b={4}))
     {'a': {'b': set()}}
     """
+    @classmethod
+    def from_dict(cls, value):
+        try:
+            return cls({k: cls.from_dict(v) for k, v in value.items()})
+        except AttributeError:
+            return set(value)
+
     def __isub__(self, rhs):
         for k, v in rhs.items():
             if k in self:
