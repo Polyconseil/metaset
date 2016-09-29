@@ -31,14 +31,14 @@ Install the package from PyPI_, using pip:
 
 .. code-block:: sh
 
-    > pip install metaset
+    pip install metaset
 
 
 Or from GitHub:
 
 .. code-block:: sh
 
-    > git clone git://github.com/lionel-panhaleux/metaset.git
+    git clone git://github.com/lionel-panhaleux/metaset.git
 
 Import it in your code:
 
@@ -47,7 +47,7 @@ Import it in your code:
     >>> from metaset import MetaSet
 
 Usage is quite straight forward,
-basic set operations are supported via the binary operators `+` `-` `|` `^`.
+basic set operations are supported via the binary operators ``+`` ``-`` ``|`` ``^``.
 
 .. code-block:: python
 
@@ -59,7 +59,7 @@ Django Postgres
 ---------------
 
 A custom Django field is available.
-Note it is only available with `PostgreSQL ≥ 9.4` and `Psycopg2 ≥ 2.5.4`, as it is stored as a `JSONB` column.
+Note it is only available with ``PostgreSQL≥9.4`` and ``Psycopg2≥2.5.4``, as it is stored as a ``JSONB`` column.
 It is quite straightforward:
 
 .. code-block:: python
@@ -77,7 +77,7 @@ It is compatible with the following versions:
 - Django 1.9, Python 2.7, 3.5
 - Django 1.10, Python 2.7, 3.5
 
-Note when you use `Django>=1.9` you have access to `JSON-specific lookups`_ not available when using `jsonfield`
+Note when you use `Django>=1.9` you have access to `JSON-specific lookups`_ not available when using ``jsonfield``
 on earlier versions:
 
 .. code-block:: python
