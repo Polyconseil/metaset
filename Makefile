@@ -11,6 +11,7 @@ test:
 
 test_docstring:
 	nosetests --with-doctest metaset
+	python -m doctest README.rst
 
 clean:
 	-rm -rf ".cache"

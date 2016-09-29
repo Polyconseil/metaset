@@ -44,14 +44,15 @@ Import it in your code:
 
 .. code-block:: python
 
-    from metaset import MetaSet
+    >>> from metaset import MetaSet
 
 Usage is quite straight forward,
 basic set operations are supported via the binary operators `+` `-` `|` `^`.
 
 .. code-block:: python
 
-    >>> MetaSet(a={1, 2}, b={3}) | MetaSet(b={4}, c={5})
+    >>> from pprint import pprint
+    >>> pprint(MetaSet(a={1, 2}, b={3}) | MetaSet(b={4}, c={5}))
     {'a': {1, 2}, 'b': {3, 4}, 'c': {5}}
 
 Detailed considerations
@@ -69,10 +70,10 @@ allowing for smart unions and intersections.
 
 .. code-block:: python
 
-    >>> MetaSet(a={1}) | Metaset(a={2}, b=set())
+    >>> pprint(MetaSet(a={1}) | MetaSet(a={2}, b=set()))
     {'a': {1, 2}, 'b': set()}
 
-    >>> MetaSet(a={1}) & Metaset(a={2}, b={3})
+    >>> MetaSet(a={1}) & MetaSet(a={2}, b={3})
     {'a': set()}
 
 So, beware of how empty-keys are handled,
