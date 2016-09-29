@@ -45,6 +45,13 @@ class MetaSetField(JSONField):
         del kwargs["blank"]
         return name, path, args, kwargs
 
+    def from_db_value(self, value, expression, connection, context):
+        if value is None:
+            return Value
+        if isinstance(value, MetaSet):
+            return value
+        return MetaSet.from_dict(value)
+
     def to_python(self, value):
         value = super(MetaSetField, self).from_db_value(self, value)
         if isinstance(value, MetaSet):

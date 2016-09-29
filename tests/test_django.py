@@ -25,15 +25,16 @@ def tearDownModule():
 
 # the refresh_from_db method only came in with 1.8, use our own.
 def refresh_from_db(obj):
-    obj = obj.__class__.objects.get(id=obj.id)
+    return obj.__class__.objects.get(id=obj.id)
 
 
 class DjangoTest(TestCase):
     def test_save_load(self):
         obj = test_models.TestModel.objects.create(
             value={'a': set([1]), 'b': set([2, 3])})
-        refresh_from_db(obj)
-        assert obj.value == MetaSet({'a': {1}, 'b': {2, 3}})
+        obj = refresh_from_db(obj)
+        assert type(obj.value) == MetaSet, type(obj.value)
+        assert obj.value == MetaSet({'a': {1}, 'b': {2, 3}}), obj.value
 
     def test_query(self):
         try:
@@ -46,16 +47,17 @@ class DjangoTest(TestCase):
         obj = test_models.TestModel.objects.create(
             value={'a': {1}, 'b': {2, 3}})
         res = test_models.TestModel.objects.filter(value__b__contains=[2])
-        assert obj == res.first()
+        assert obj == res.first(), res
         res = test_models.TestModel.objects.filter(value__has_key='a')
-        assert obj == res.first()
+        assert obj == res.first(), res
 
     def test_inception(self):
         obj = test_models.TestModel.objects.create(
             value={'a': {'b': {1}, 'c': {2, 3}}, 'd': {'e': {4}}}
             )
-        refresh_from_db(obj)
+        obj = refresh_from_db(obj)
         assert obj.value == MetaSet(
             a=MetaSet(b={1}, c={2, 3}),
             d=MetaSet(e={4}),
             )
+        assert type(obj.value['a']) == MetaSet, type(obj.value['a'])
