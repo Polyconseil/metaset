@@ -10,8 +10,8 @@ def read(filename):
 setup(
     name='metaset',
     version='1.0.3',
-    author='Polyconseil dev team',
-    author_email='autolib-dev@polyconseil.fr',
+    author='Polyconseil',
+    author_email='opensource+metaset@polyconseil.fr',
     description='A container for dicts of sets - alternative to dictset',
     license='BSD',
     keywords=['metaset', 'dictset', 'set', 'container'],
