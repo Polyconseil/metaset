@@ -23,6 +23,8 @@ from . import MetaSet
 
 
 def _recur_serialize_metaset(value):
+    """Transform a MetaSet to a JSON serializable value
+    """
     try:
         return {k: _recur_serialize_metaset(v) for k, v in value.items()}
     except AttributeError:
@@ -47,7 +49,7 @@ class MetaSetField(JSONField):
 
     def from_db_value(self, value, expression, connection, context):
         if value is None:
-            return Value
+            return value
         if isinstance(value, MetaSet):
             return value
         return MetaSet.from_dict(value)
