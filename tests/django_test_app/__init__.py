@@ -13,6 +13,5 @@ if not settings.configured:
         INSTALLED_APPS=[
             'tests.django_test_app',
         ],
-        # MIDDLEWARE_CLASSES=[],
     )
 apps.populate(settings.INSTALLED_APPS)
