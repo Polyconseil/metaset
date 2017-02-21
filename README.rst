@@ -38,7 +38,7 @@ Or from GitHub:
 
 .. code-block:: sh
 
-    git clone git://github.com/lionel-panhaleux/metaset.git
+    git clone git://github.com/Polyconseil/metaset.git
 
 Import it in your code:
 
