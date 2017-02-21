@@ -32,6 +32,7 @@ class DjangoTest(TestCase):
     def test_save_load(self):
         obj = test_models.TestModel.objects.create(
             value={'a': set([1]), 'b': set([2, 3])})
+        obj.full_clean()
         obj = refresh_from_db(obj)
         assert type(obj.value) == MetaSet, type(obj.value)
         assert obj.value == MetaSet({'a': {1}, 'b': {2, 3}}), obj.value

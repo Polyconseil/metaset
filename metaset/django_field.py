@@ -11,20 +11,22 @@ except ImportError:
 
 try:
     from django.contrib.postgres.fields import JSONField
+    from django.contrib.postgres.forms import JSONField as JSONFormField
 except ImportError:
     # For Django < 1.9 use jsonfield (https://pypi.python.org/pypi/jsonfield)
     try:
         from jsonfield import JSONField
+        from jsonfield.fields import JSONFormField
     except ImportError:
         JSONField = object
+        JSONFormField = object
 
 
 from . import MetaSet
 
 
 def _recur_serialize_metaset(value):
-    """Transform a MetaSet to a JSON serializable value
-    """
+    """Transform a MetaSet to a JSON serializable value"""
     try:
         return {k: _recur_serialize_metaset(v) for k, v in value.items()}
     except AttributeError:
@@ -50,12 +52,9 @@ class MetaSetField(JSONField):
     def from_db_value(self, value, expression, connection, context):
         if value is None:
             return value
-        if isinstance(value, MetaSet):
-            return value
         return MetaSet.from_dict(value)
 
     def to_python(self, value):
-        value = super(MetaSetField, self).from_db_value(self, value)
         if isinstance(value, MetaSet):
             return value
         if value is None:
@@ -67,3 +66,8 @@ class MetaSetField(JSONField):
             value = _recur_serialize_metaset(value)
         return super(MetaSetField, self).get_db_prep_value(
             value, connection, prepared)
+
+    def validate(self, value, model_instance):
+        if value is not None:
+            value = _recur_serialize_metaset(value)
+        return super(MetaSetField, self).validate(value, model_instance)
