@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from .django_test_app import models as test_models
+import json
 
 from django.test import runner
 from django.test import TestCase
@@ -7,6 +7,8 @@ from django.test import utils
 from nose.plugins.skip import SkipTest
 from metaset import MetaSet
 
+from .django_test_app import forms as test_forms
+from .django_test_app import models as test_models
 
 # Setup Django test environment
 state = {}
@@ -36,6 +38,12 @@ class DjangoTest(TestCase):
         obj = refresh_from_db(obj)
         assert type(obj.value) == MetaSet, type(obj.value)
         assert obj.value == MetaSet({'a': {1}, 'b': {2, 3}}), obj.value
+
+    def test_model_form(self):
+        obj = test_models.TestModel.objects.create(
+            value={'a': set([1]), 'b': set([2, 3])})
+        form = test_forms.TestModelForm(instance=obj)
+        assert json.loads(form['value'].value()) == {'a': [1], 'b': [2, 3]}
 
     def test_query(self):
         try:
