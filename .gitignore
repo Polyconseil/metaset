@@ -10,3 +10,4 @@ dist
 .tox
 *.egg-info
 *.egg
+.idea
