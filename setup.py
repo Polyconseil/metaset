@@ -17,7 +17,7 @@ setup(
     keywords=['metaset', 'dictset', 'set', 'container'],
     url='https://github.com/Polyconseil/metaset',
     download_url='http://pypi.python.org/pypi/metaset/',
-    packages=find_packages(),
+    packages=find_packages(exclude=['tests*']),
     long_description=read('README.rst'),
     install_requires=[],
     classifiers=[
