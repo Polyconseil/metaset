@@ -72,7 +72,7 @@ It is quite straightforward:
 It is compatible with the following versions:
 
 - Django 1.11, Python 2.7
-- Django 2.1, Python 3.6, 3.7
+- Django 2.1, Python 3.6
 
 Detailed considerations
 -----------------------
