@@ -129,7 +129,10 @@ class MetaSet(dict):
             return cls([
                 (k, cls.union([i[1] for i in g]))
                 for k, g in groupby(
-                    sorted(chain.from_iterable(arg.items() for arg in args), key=lambda a: a[0]),
+                    sorted(
+                        chain.from_iterable(arg.items() for arg in args),
+                        key=lambda a: a[0]
+                    ),
                     key=lambda a: a[0]
                 )
             ])
