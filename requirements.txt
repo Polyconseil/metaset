@@ -1,5 +1,5 @@
 -e .
-black
+black; python_version >= "3.6"
 psycopg2
 nose
 flake8
