@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 from copy import deepcopy
+from itertools import chain, groupby
 from pkg_resources import get_distribution
 
 
@@ -118,3 +119,19 @@ class MetaSet(dict):
 
     def __ge__(self, rhs):
         return all(k not in rhs or v >= rhs[k] for k, v in self.items())
+
+    @classmethod
+    def union(cls, args):
+        """Compute the union of multiple metasets
+        Faster than reduce(or_, ...)
+        """
+        try:
+            return cls([
+                (k, cls.union([i[1] for i in g]))
+                for k, g in groupby(
+                    sorted(chain.from_iterable(arg.items() for arg in args), key=lambda a: a[0]),
+                    key=lambda a: a[0]
+                )
+            ])
+        except AttributeError:
+            return set(chain.from_iterable(args))
