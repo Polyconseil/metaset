@@ -5,7 +5,7 @@ from itertools import chain, groupby
 from pkg_resources import get_distribution
 
 
-__version__ = get_distribution('metaset').version
+__version__ = get_distribution("metaset").version
 
 
 class MetaSet(dict):
@@ -51,6 +51,7 @@ class MetaSet(dict):
     >>> MetaSet(a=MetaSet(b={1}), c=MetaSet(d={3})) & MetaSet(a=MetaSet(b={4}))
     {'a': {'b': set()}}
     """
+
     @classmethod
     def from_dict(cls, value):
         try:
@@ -126,15 +127,17 @@ class MetaSet(dict):
         Faster than reduce(or_, ...)
         """
         try:
-            return cls([
-                (k, cls.union([i[1] for i in g]))
-                for k, g in groupby(
-                    sorted(
-                        chain.from_iterable(arg.items() for arg in args),
-                        key=lambda a: a[0]
-                    ),
-                    key=lambda a: a[0]
-                )
-            ])
+            return cls(
+                [
+                    (k, cls.union([i[1] for i in g]))
+                    for k, g in groupby(
+                        sorted(
+                            chain.from_iterable(arg.items() for arg in args),
+                            key=lambda a: a[0],
+                        ),
+                        key=lambda a: a[0],
+                    )
+                ]
+            )
         except AttributeError:
             return set(chain.from_iterable(args))

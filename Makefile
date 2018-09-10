@@ -4,6 +4,7 @@ update:
 	pip install -r requirements.txt
 
 quality:
+	black -q -diff metaset tests
 	flake8 setup.py metaset tests
 
 test:

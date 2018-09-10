@@ -38,18 +38,18 @@ class MetaFormField(JSONFormField):
     def prepare_value(self, value):
         if value is None:
             return None
-        return super(MetaFormField, self).prepare_value(
-            _recur_serialize_metaset(value))
+        return super(MetaFormField, self).prepare_value(_recur_serialize_metaset(value))
 
 
 class MetaSetField(JSONField):
     """ A categorized set field.
     """
+
     description = ugettext_lazy("Dict of sets")
 
     def __init__(self, *args, **kwargs):
-        kwargs['blank'] = True
-        kwargs['default'] = MetaSet
+        kwargs["blank"] = True
+        kwargs["default"] = MetaSet
         super(MetaSetField, self).__init__(*args, **kwargs)
 
     def deconstruct(self):
@@ -73,8 +73,7 @@ class MetaSetField(JSONField):
     def get_db_prep_save(self, value, connection, prepared=False):
         if value is not None:
             value = _recur_serialize_metaset(value)
-        return super(MetaSetField, self).get_db_prep_value(
-            value, connection, prepared)
+        return super(MetaSetField, self).get_db_prep_value(value, connection, prepared)
 
     def validate(self, value, model_instance):
         if value is not None:
@@ -82,6 +81,6 @@ class MetaSetField(JSONField):
         return super(MetaSetField, self).validate(value, model_instance)
 
     def formfield(self, **kwargs):
-        defaults = {'form_class': MetaFormField}
+        defaults = {"form_class": MetaFormField}
         defaults.update(kwargs)
         return super(MetaSetField, self).formfield(**defaults)

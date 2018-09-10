@@ -7,4 +7,4 @@ from . import models
 class TestModelForm(ModelForm):
     class Meta:
         model = models.TestModel
-        fields = '__all__'
+        fields = "__all__"
