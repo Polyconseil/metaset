@@ -20,7 +20,7 @@ Links
 
 - Package on `PyPI`_: http://pypi.python.org/pypi/metaset/
 - Source on `GitHub <http://github.com/>`_: http://github.com/Polyconseil/metaset/
-- Build on `Travis CI <http://travis-ci.org/>`_: http://travis-ci.org/lionel-panhaleux/metaset/
+- Build on `Travis CI <http://travis-ci.org/>`_: http://travis-ci.org/polyconseil/metaset/
 
 Quickstart
 ----------
