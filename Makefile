@@ -1,7 +1,7 @@
 .PHONY: update quality tests clean
 
 update:
-	pip install -r requirements.txt
+	pip install -r requirements/dev.txt
 
 quality:
 	black -q --diff metaset tests

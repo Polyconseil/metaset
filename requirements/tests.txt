@@ -1,0 +1,4 @@
+-e .
+psycopg2
+nose
+tox
