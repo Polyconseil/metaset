@@ -69,10 +69,11 @@ It is quite straightforward:
     >>> class MyModel(models.Model):        # doctest: +SKIP
             mset = MetaSetField()           # doctest: +SKIP
 
-It is compatible with the following versions:
+The following versions of Python and Django are supported:
 
-- Django 1.11, Python 2.7
-- Django 2.1, Python 3.6
+- Python 2.7, 3.6, 3.7 and 3.8;
+- Django 1.11, 2.0, 2.1, 2.2, 3.0 and 3.1.
+
 
 Detailed considerations
 -----------------------

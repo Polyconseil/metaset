@@ -58,7 +58,7 @@ class MetaSetField(JSONField):
         del kwargs["blank"]
         return name, path, args, kwargs
 
-    def from_db_value(self, value, expression, connection, context):
+    def from_db_value(self, value, expression, connection, context=None):
         if value is None:
             return value
         return MetaSet.from_dict(value)

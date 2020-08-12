@@ -7,20 +7,55 @@ services:
 addons:
   postgresql: "9.6"
 
+install:
+  - travis_retry pip install tox tox-travis
+
 script:
   - tox
 
 matrix:
+  fast_finish: true
   include:
-    - python: "2.7"
-      env: TOXENV=py27-django111
-    - python: "3.6"
-      env: TOXENV=py36-django21
+    # https://docs.djangoproject.com/en/dev/faq/install/#what-python-version-can-i-use-with-django
+    - {env: DJANGO=1.11, python: '2.7'}
+    - {env: DJANGO=1.11, python: '3.6'}
+    - {env: DJANGO=1.11, python: '3.7'}
+    - {env: DJANGO=1.11, python: '3.8'}
+    - {env: DJANGO=1.11, python: 'nightly'}
 
-    # Quality
-    - python: "3.6"
-      env: TOXENV=quality
+    - {env: DJANGO=2.0, python: '3.6'}
+    - {env: DJANGO=2.0, python: '3.7'}
+    - {env: DJANGO=2.0, python: '3.8'}
+    - {env: DJANGO=2.0, python: 'nightly'}
 
-    # Docstring
-    - python: "3.6"
-      env: TOXENV=docstring
+    - {env: DJANGO=2.1, python: '3.6'}
+    - {env: DJANGO=2.1, python: '3.7'}
+    - {env: DJANGO=2.1, python: '3.8'}
+    - {env: DJANGO=2.1, python: 'nightly'}
+
+    - {env: DJANGO=2.2, python: '3.6'}
+    - {env: DJANGO=2.2, python: '3.7'}
+    - {env: DJANGO=2.2, python: '3.8'}
+    - {env: DJANGO=2.2, python: 'nightly'}
+
+    - {env: DJANGO=3.0, python: '3.6'}
+    - {env: DJANGO=3.0, python: '3.7'}
+    - {env: DJANGO=3.0, python: '3.8'}
+    - {env: DJANGO=3.0, python: 'nightly'}
+
+    - {env: DJANGO=3.1, python: '3.6'}
+    - {env: DJANGO=3.1, python: '3.7'}
+    - {env: DJANGO=3.1, python: '3.8'}
+    - {env: DJANGO=3.1, python: 'nightly'}
+
+    - {env: DJANGO=master, python: '3.6'}
+    - {env: DJANGO=master, python: '3.7'}
+    - {env: DJANGO=master, python: '3.8'}
+    - {env: DJANGO=master, python: 'nightly'}
+
+    - {python: '3.8', env: TOXENV=docstring}
+    - {python: '3.8', env: TOXENV=quality}
+
+  allow_failures:
+    - python: 'nightly'
+    - env: DJANGO=master
