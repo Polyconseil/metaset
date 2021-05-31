@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import json
 
 from django.test import runner
@@ -33,7 +32,7 @@ def refresh_from_db(obj):
 class DjangoTest(TestCase):
     def test_save_load(self):
         obj = test_models.TestModel.objects.create(
-            value={"a": set([1]), "b": set([2, 3])}
+            value={"a": {1}, "b": {2, 3}}
         )
         obj.full_clean()
         obj = refresh_from_db(obj)
@@ -42,7 +41,7 @@ class DjangoTest(TestCase):
 
     def test_model_form(self):
         obj = test_models.TestModel.objects.create(
-            value={"a": set([1]), "b": set([2, 3])}
+            value={"a": {1}, "b": {2, 3}}
         )
         form = test_forms.TestModelForm(instance=obj)
         assert json.loads(form["value"].value()) == {"a": [1], "b": [2, 3]}
