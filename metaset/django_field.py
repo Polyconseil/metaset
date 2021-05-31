@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import absolute_import, unicode_literals
-
-
 try:
     from django.utils.translation import ugettext_lazy
 # avoid import failures for non Django builds.
@@ -38,7 +34,7 @@ class MetaFormField(JSONFormField):
     def prepare_value(self, value):
         if value is None:
             return None
-        return super(MetaFormField, self).prepare_value(_recur_serialize_metaset(value))
+        return super().prepare_value(_recur_serialize_metaset(value))
 
 
 class MetaSetField(JSONField):
@@ -50,10 +46,10 @@ class MetaSetField(JSONField):
     def __init__(self, *args, **kwargs):
         kwargs["blank"] = True
         kwargs["default"] = MetaSet
-        super(MetaSetField, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def deconstruct(self):
-        name, path, args, kwargs = super(MetaSetField, self).deconstruct()
+        name, path, args, kwargs = super().deconstruct()
         del kwargs["default"]
         del kwargs["blank"]
         return name, path, args, kwargs
@@ -73,14 +69,14 @@ class MetaSetField(JSONField):
     def get_db_prep_save(self, value, connection, prepared=False):
         if value is not None:
             value = _recur_serialize_metaset(value)
-        return super(MetaSetField, self).get_db_prep_value(value, connection, prepared)
+        return super().get_db_prep_value(value, connection, prepared)
 
     def validate(self, value, model_instance):
         if value is not None:
             value = _recur_serialize_metaset(value)
-        return super(MetaSetField, self).validate(value, model_instance)
+        return super().validate(value, model_instance)
 
     def formfield(self, **kwargs):
         defaults = {"form_class": MetaFormField}
         defaults.update(kwargs)
-        return super(MetaSetField, self).formfield(**defaults)
+        return super().formfield(**defaults)
