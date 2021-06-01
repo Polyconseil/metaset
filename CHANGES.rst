@@ -3,7 +3,7 @@
 
 - Drop support for Python 2
 - Drop support for Django 1.1, 2.0, 2.1 & 3.0
-
+- Fix support for Django 3.1
 
 1.3.0 (2020-08-12)
 ------------------
