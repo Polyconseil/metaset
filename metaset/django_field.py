@@ -1,3 +1,5 @@
+import json
+
 try:
     from django.utils.translation import ugettext_lazy
 # avoid import failures for non Django builds.
@@ -6,16 +8,21 @@ except ImportError:
     ugettext_lazy = lambda a: a  # noqa: E731
 
 try:
-    from django.contrib.postgres.fields import JSONField
-    from django.contrib.postgres.forms import JSONField as JSONFormField
+    from django.db import JSONField
+    from django.forms import JSONField as JSONFormField
 except ImportError:
-    # For Django < 1.9 use jsonfield (https://pypi.python.org/pypi/jsonfield)
+    # For Django < 3.1
     try:
-        from jsonfield import JSONField
-        from jsonfield.fields import JSONFormField
+        from django.contrib.postgres.fields import JSONField
+        from django.contrib.postgres.forms import JSONField as JSONFormField
     except ImportError:
-        JSONField = object
-        JSONFormField = object
+        # For Django < 1.9 use jsonfield (https://pypi.python.org/pypi/jsonfield)
+        try:
+            from jsonfield import JSONField
+            from jsonfield.fields import JSONFormField
+        except ImportError:
+            JSONField = object
+            JSONFormField = object
 
 
 from . import MetaSet
@@ -57,6 +64,9 @@ class MetaSetField(JSONField):
     def from_db_value(self, value, expression, connection, context=None):
         if value is None:
             return value
+        if isinstance(value, str):
+            # Django >= 3.1
+            value = json.loads(value)
         return MetaSet.from_dict(value)
 
     def to_python(self, value):
