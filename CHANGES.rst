@@ -1,4 +1,4 @@
-1.3.1 (unreleased)
+1.4.0 (2021-06-02)
 ------------------
 
 - Drop support for Python 2

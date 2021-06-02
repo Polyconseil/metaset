@@ -9,7 +9,7 @@ def read(filename):
 
 setup(
     name='metaset',
-    version='1.3.1.dev0',
+    version='1.4.0',
     author='Polyconseil',
     author_email='opensource+metaset@polyconseil.fr',
     description='A container for dicts of sets - alternative to dictset',
