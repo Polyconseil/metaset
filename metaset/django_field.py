@@ -2,27 +2,20 @@ import json
 
 try:
     from django.utils.translation import ugettext_lazy
+
+    try:
+        # Django >= 3.1
+        from django.db import JSONField
+        from django.forms import JSONField as JSONFormField
+    except ImportError:
+        # For Django < 3.1
+        from django.contrib.postgres.fields import JSONField
+        from django.contrib.postgres.forms import JSONField as JSONFormField
 # avoid import failures for non Django builds.
 except ImportError:
     JSONField = object
+    JSONFormField = object
     ugettext_lazy = lambda a: a  # noqa: E731
-
-try:
-    from django.db import JSONField
-    from django.forms import JSONField as JSONFormField
-except ImportError:
-    # For Django < 3.1
-    try:
-        from django.contrib.postgres.fields import JSONField
-        from django.contrib.postgres.forms import JSONField as JSONFormField
-    except ImportError:
-        # For Django < 1.9 use jsonfield (https://pypi.python.org/pypi/jsonfield)
-        try:
-            from jsonfield import JSONField
-            from jsonfield.fields import JSONFormField
-        except ImportError:
-            JSONField = object
-            JSONFormField = object
 
 
 from . import MetaSet
