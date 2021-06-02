@@ -1,2 +1,2 @@
-black; python_version >= "3.6"
+black
 flake8
