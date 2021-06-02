@@ -20,20 +20,23 @@ matrix:
     - {env: DJANGO=2.2, python: '3.6'}
     - {env: DJANGO=2.2, python: '3.7'}
     - {env: DJANGO=2.2, python: '3.8'}
+    - {env: DJANGO=2.2, python: '3.9'}
     - {env: DJANGO=2.2, python: 'nightly'}
 
     - {env: DJANGO=3.1, python: '3.6'}
     - {env: DJANGO=3.1, python: '3.7'}
     - {env: DJANGO=3.1, python: '3.8'}
+    - {env: DJANGO=3.1, python: '3.9'}
     - {env: DJANGO=3.1, python: 'nightly'}
 
     - {env: DJANGO=master, python: '3.6'}
     - {env: DJANGO=master, python: '3.7'}
     - {env: DJANGO=master, python: '3.8'}
+    - {env: DJANGO=master, python: '3.9'}
     - {env: DJANGO=master, python: 'nightly'}
 
-    - {python: '3.8', env: TOXENV=docstring}
-    - {python: '3.8', env: TOXENV=quality}
+    - {python: '3.9', env: TOXENV=docstring}
+    - {python: '3.9', env: TOXENV=quality}
 
   allow_failures:
     - python: 'nightly'
