@@ -1,7 +1,7 @@
 import json
 
 try:
-    from django.utils.translation import ugettext_lazy
+    from django.utils.translation import gettext_lazy
 
     try:
         # Django >= 3.1
@@ -15,7 +15,7 @@ try:
 except ImportError:
     JSONField = object
     JSONFormField = object
-    ugettext_lazy = lambda a: a  # noqa: E731
+    gettext_lazy = lambda a: a  # noqa: E731
 
 
 from . import MetaSet
@@ -39,7 +39,7 @@ class MetaFormField(JSONFormField):
 class MetaSetField(JSONField):
     """A categorized set field."""
 
-    description = ugettext_lazy("Dict of sets")
+    description = gettext_lazy("Dict of sets")
 
     def __init__(self, *args, **kwargs):
         kwargs["blank"] = True
