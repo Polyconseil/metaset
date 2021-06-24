@@ -1,4 +1,4 @@
-1.4.1 (unreleased)
+1.4.1 (2021-06-24)
 ------------------
 
 - Remove use of deprecated ugettext_lazy
