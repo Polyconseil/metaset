@@ -22,8 +22,7 @@ from . import MetaSet
 
 
 def _recur_serialize_metaset(value):
-    """Transform a MetaSet to a JSON serializable value
-    """
+    """Transform a MetaSet to a JSON serializable value"""
     try:
         return {k: _recur_serialize_metaset(v) for k, v in value.items()}
     except AttributeError:
@@ -38,8 +37,7 @@ class MetaFormField(JSONFormField):
 
 
 class MetaSetField(JSONField):
-    """ A categorized set field.
-    """
+    """A categorized set field."""
 
     description = ugettext_lazy("Dict of sets")
 
