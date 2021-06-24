@@ -1,0 +1,70 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 0 * * 0' # weekly
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      # Label used to access the service container
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          # Maps tcp port 5432 on service container to the host
+          - 5432:5432
+
+    name: Python ${{ matrix.python-version }} / ${{ matrix.django }}
+    strategy:
+      matrix:
+        python-version:
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+        django:
+          - django22
+          - django31
+          - django32
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Cache pip
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install --upgrade tox
+      - name: Setup test database
+        run: |
+          psql -c 'DROP DATABASE IF EXISTS metaset_test;' -U postgres -h localhost
+          psql -c 'CREATE DATABASE metaset_test;' -U postgres -h localhost
+        env:
+          PGPASSWORD: postgres
+      - name: Run tests
+        run: |
+          tox -v -e py-${{ matrix.django }}
+        env:
+          DB_HOST: localhost
+          DB_PORT: "5432"
+          DB_USER: postgres
+          DB_NAME: metaset_test
+          DB_PASSWORD: postgres
