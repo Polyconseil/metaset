@@ -4,15 +4,11 @@ update:
 	pip install -r requirements/dev.txt
 
 quality:
-	black -q --diff metaset tests
+	black --check --diff metaset tests
 	flake8 setup.py metaset tests
 
 test:
-	nosetests tests
-
-test_docstring:
-	nosetests --with-doctest metaset
-	python -m doctest README.rst
+	pytest --doctest-glob=README.rst --doctest-modules
 
 clean:
 	-rm -rf ".cache"
