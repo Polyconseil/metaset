@@ -29,13 +29,6 @@ class DjangoTest(TestCase):
         assert json.loads(form["value"].value()) == {"a": [1], "b": [2, 3]}
 
     def test_query(self):
-        try:
-            from django.contrib.postgres.fields import JSONField  # noqa: F401
-        except ImportError:
-            pytest.skip(
-                "JSON queries are only available " "for native Django (>=1.9) JSONField"
-            )
-
         obj = test_models.TestModel.objects.create(value={"a": {1}, "b": {2, 3}})
         res = test_models.TestModel.objects.filter(value__b__contains=[2])
         assert obj == res.first(), res

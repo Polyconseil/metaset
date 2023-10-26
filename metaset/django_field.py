@@ -2,15 +2,8 @@ import json
 
 try:
     from django.utils.translation import gettext_lazy
-
-    try:
-        # Django >= 3.1
-        from django.db.models import JSONField
-        from django.forms import JSONField as JSONFormField
-    except ImportError:
-        # For Django < 3.1
-        from django.contrib.postgres.fields import JSONField
-        from django.contrib.postgres.forms import JSONField as JSONFormField
+    from django.db.models import JSONField
+    from django.forms import JSONField as JSONFormField
 # avoid import failures for non Django builds.
 except ImportError:
     JSONField = object
