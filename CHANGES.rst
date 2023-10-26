@@ -1,6 +1,7 @@
 1.4.2 (unreleased)
 ------------------
 
+- Drop support for Django 3.1
 - Drop support for Django 2.2
 
 
