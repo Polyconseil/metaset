@@ -5,7 +5,7 @@ try:
 
     try:
         # Django >= 3.1
-        from django.db import JSONField
+        from django.db.models import JSONField
         from django.forms import JSONField as JSONFormField
     except ImportError:
         # For Django < 3.1
