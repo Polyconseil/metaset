@@ -2,8 +2,6 @@ import json
 
 from django.test import TestCase
 
-import pytest
-
 from metaset import MetaSet
 
 from .django_test_app import forms as test_forms
@@ -17,19 +15,25 @@ def refresh_from_db(obj):
 
 class DjangoTest(TestCase):
     def test_save_load(self):
-        obj = test_models.TestModel.objects.create(value={"a": {1}, "b": {2, 3}})
+        obj = test_models.TestModel.objects.create(
+            value={"a": {1}, "b": {2, 3}},
+        )
         obj.full_clean()
         obj = refresh_from_db(obj)
-        assert type(obj.value) == MetaSet, type(obj.value)
+        assert isinstance(obj.value, MetaSet), type(obj.value)
         assert obj.value == MetaSet({"a": {1}, "b": {2, 3}}), obj.value
 
     def test_model_form(self):
-        obj = test_models.TestModel.objects.create(value={"a": {1}, "b": {2, 3}})
+        obj = test_models.TestModel.objects.create(
+            value={"a": {1}, "b": {2, 3}},
+        )
         form = test_forms.TestModelForm(instance=obj)
         assert json.loads(form["value"].value()) == {"a": [1], "b": [2, 3]}
 
     def test_query(self):
-        obj = test_models.TestModel.objects.create(value={"a": {1}, "b": {2, 3}})
+        obj = test_models.TestModel.objects.create(
+            value={"a": {1}, "b": {2, 3}},
+        )
         res = test_models.TestModel.objects.filter(value__b__contains=[2])
         assert obj == res.first(), res
         res = test_models.TestModel.objects.filter(value__has_key="a")
@@ -40,5 +44,8 @@ class DjangoTest(TestCase):
             value={"a": {"b": {1}, "c": {2, 3}}, "d": {"e": {4}}}
         )
         obj = refresh_from_db(obj)
-        assert obj.value == MetaSet(a=MetaSet(b={1}, c={2, 3}), d=MetaSet(e={4}))
-        assert type(obj.value["a"]) == MetaSet, type(obj.value["a"])
+        assert obj.value == MetaSet(
+            a=MetaSet(b={1}, c={2, 3}),
+            d=MetaSet(e={4}),
+        )
+        assert isinstance(obj.value["a"], MetaSet), type(obj.value["a"])
