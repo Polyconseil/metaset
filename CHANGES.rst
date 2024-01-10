@@ -1,4 +1,4 @@
-1.4.2 (unreleased)
+2.0.0 (2024-01-10)
 ------------------
 
 - Add support for Python 3.11 & 3.12
