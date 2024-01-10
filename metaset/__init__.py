@@ -1,9 +1,9 @@
 from copy import deepcopy
 from itertools import chain, groupby
-from pkg_resources import get_distribution
+from importlib.metadata import version
 
 
-__version__ = get_distribution("metaset").version
+__version__ = version("metaset")
 
 
 class MetaSet(dict):
