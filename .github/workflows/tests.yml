@@ -33,6 +33,8 @@ jobs:
           - 3.8
           - 3.9
           - "3.10"
+          - "3.11"
+          - "3.12"
         django:
           - django32
           - django42
@@ -42,6 +44,10 @@ jobs:
             python-version: "3.8"
           - django: django50
             python-version: "3.9"
+          - django: django32
+            python-version: "3.11"
+          - django: django32
+            python-version: "3.12"
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
