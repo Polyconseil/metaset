@@ -71,8 +71,8 @@ It is quite straightforward:
 
 The following versions of Python and Django are supported:
 
-- Python 2.7, 3.6, 3.7 and 3.8;
-- Django 1.11, 2.0, 2.1, 2.2, 3.0 and 3.1.
+- Python 3.8, 3.9, 3.10, 3.11 and 3.12;
+- Django 3.2, 4.2 and 5.0.
 
 
 Detailed considerations
